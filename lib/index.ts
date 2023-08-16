@@ -1,6 +1,8 @@
 import type { User, UserRole, UserStatus, OrgStatus, Organization } from './proto/_gen/profiles_pb'
 import type { ILocation, OkResponse } from '@hankgalt/comff-geo-tsclient/lib'
 
+export type { User, UserRole, UserStatus, OrgStatus, Organization } from './proto/_gen/profiles_pb'
+
 export interface ProfilesServiceClient {
   getRoles: () => Promise<ProfileRolesResponse>
   createProfile: (u: Profile) => Promise<UserProfileResponse>

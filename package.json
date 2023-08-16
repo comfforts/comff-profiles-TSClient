@@ -1,6 +1,6 @@
 {
   "name": "@hankgalt/comff-profiles-tsclient",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Comfforts profiles service TS client",
   "main": "index.ts",
   "scripts": {
