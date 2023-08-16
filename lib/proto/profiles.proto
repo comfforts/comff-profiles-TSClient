@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+package profiles.v1;
+
+option go_package = "github.com/comfforts/comff-profiles/api/profiles_v1";
+
+enum Role {
+    VISITOR = 0;
+    CREATOR = 1;
+    PRODUCER = 2;
+    WORKER = 3;
+    ADMIN = 4;
+}
+
+enum UserStatus {
+    PENDING = 0;
+    ACTIVE = 1;
+    DEACTIVATED = 2;
+}
+
+enum OrgStatus {
+    PENDING_ORG = 0;
+    ACTIVE_ORG = 1;
+    REGISTERED = 2;
+}
+
+enum UserRole {
+    USER = 0;
+    // creators
+    ARTISAN = 1;
+    CHEF = 2;
+    // producers
+    STORE_ADMIN = 3;
+    STORE_USER = 4;
+    // workers
+    COURIER = 5;
+    COURIER_ADMIN = 6;
+    STAFF = 7;
+    ORGANIZER = 8;
+    KNOWLEDGE_PROVIDER = 9;
+    SUPER_USER = 10;
+}
+
+message User {
+    string email = 1;
+    string name = 2;
+    string org = 3;
+    string external_id = 4;
+    repeated UserRole roles = 5;
+    UserStatus status = 6;
+    float latitude = 7;
+    float longitude = 8;
+}
+
+message CreateProfileRequest {
+    string  email = 1;
+    string  name = 2;
+    string  org = 3;
+    repeated UserRole roles = 4;
+    float   longitude = 5;
+    float   latitude = 6;
+    string  requested_by = 7;
+}
+
+message GetProfileRequest {
+    string email = 1;
+}
+
+message DeleteProfileRequest {
+    string email = 1;
+}
+
+message ProfileResponse {
+    optional User   user = 1;
+}
+
+message UpdateProfileRequest {
+    string  email = 1;
+    string  org = 2;
+    repeated UserRole roles = 3;
+    float   longitude = 4;
+    float   latitude = 5;
+    string requested_by = 6;
+}
+
+message ProfileStatusUpdate {
+    string  email = 1;
+    UserStatus   status = 2;
+}
+
+message ProfileIdUpdate {
+    string  email = 1;
+    string  external_id = 2;
+}
+
+message OrgIdUpdate {
+    string  name = 1;
+    string  external_id = 2;
+}
+
+message OrgStatusUpdate {
+    string      name = 1;
+    OrgStatus   status = 2;
+}
+
+message RolesRequest {}
+
+message RolesResponse {
+    repeated UserRole roles = 1;
+}
+
+message Organization {
+    string name = 1;
+    OrgStatus status = 2;
+    string external_id = 3;
+}
+
+message GetOrgRequest {
+    string name = 1;
+}
+
+message OrgResponse {
+    optional Organization org = 1;
+}
+
+message DeleteOrgRequest {
+    string name = 1;
+}
+
+message DeleteResponse {
+    bool ok = 1;
+}
+
+service Profiles {
+    rpc CreateProfile(CreateProfileRequest) returns (ProfileResponse) {}
+    rpc GetProfile(GetProfileRequest) returns (ProfileResponse) {}
+    rpc UpdateProfile(UpdateProfileRequest) returns (ProfileResponse) {}
+    rpc UpdateProfileStatus(ProfileStatusUpdate) returns (ProfileResponse) {}
+    rpc UpdateProfileId(ProfileIdUpdate) returns (ProfileResponse) {}
+    rpc DeleteProfile(DeleteProfileRequest) returns (DeleteResponse) {}
+    rpc GetRoles(RolesRequest) returns (RolesResponse) {}
+    rpc GetOrg(GetOrgRequest) returns (OrgResponse) {}
+    rpc UpdateOrgStatus(OrgStatusUpdate) returns (OrgResponse) {}
+    rpc UpdateOrgId(OrgIdUpdate) returns (OrgResponse) {}
+    rpc DeleteOrg(DeleteOrgRequest) returns (DeleteResponse) {}
+}
