@@ -9,7 +9,7 @@ import {
   mapProfileResponse,
 } from './index'
 
-export async function updateProfile (u: Profile): Promise<UserProfileResponse> {
+export const updateProfile = async (u: Profile): Promise<UserProfileResponse> => {
   return await new Promise<UserProfileResponse>((resolve, reject) => {
     const upReq = new UpdateProfileRequest()
     upReq.setOrg(u.org)
