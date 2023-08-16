@@ -1,3 +1,8 @@
+export {
+  UserRole,
+  UserStatus,
+  OrgStatus
+} from './lib/proto/_gen/profiles_pb'
 export { createProfile } from './lib/create-profile'
 export { getProfile } from './lib/get-profile'
 export { updateProfileStatus } from './lib/update-profile-status'
