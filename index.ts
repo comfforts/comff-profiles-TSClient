@@ -1,4 +1,5 @@
 export {
+  Role,
   UserRole,
   UserStatus,
   OrgStatus
