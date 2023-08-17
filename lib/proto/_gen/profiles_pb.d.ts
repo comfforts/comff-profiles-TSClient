@@ -435,6 +435,7 @@ export enum Role {
     PRODUCER = 2,
     WORKER = 3,
     ADMIN = 4,
+    FACILITATOR = 5,
 }
 
 export enum UserStatus {
