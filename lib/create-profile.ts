@@ -13,6 +13,8 @@ export async function createProfile (u: Profile): Promise<UserProfileResponse> {
     cpReq.setEmail(u.email)
     cpReq.setRequestedBy(u.email)
     cpReq.setRolesList(u.roles !== undefined ? u.roles : [])
+    cpReq.setLatitude(u.loc?.latitude ?? 0)
+    cpReq.setLongitude(u.loc?.longitude ?? 0)
 
     try {
       profileClient.createProfile(cpReq, (err, res: ProfileResponse) => {
