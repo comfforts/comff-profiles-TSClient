@@ -18,6 +18,7 @@ export interface Profile {
     roles: UserRole[];
     externalId?: string;
     loc?: ILocation;
+    geocode?: string;
     status?: UserStatus;
 }
 export interface Org {

@@ -1,7 +1,7 @@
 import { createProfile } from '../create-profile'
-import { getProfile } from '../get-profile'
-import { deleteProfile } from '../delete-profile'
-import { deleteOrg } from '../delete-org'
+import { getProfile } from '../../dist/lib/get-profile'
+import { deleteProfile } from '../../dist/lib/delete-profile'
+import { deleteOrg } from '../../dist/lib/delete-org'
 import { UserRole } from '../proto/_gen/profiles_pb'
 
 describe('profile client', () => {
@@ -13,6 +13,10 @@ describe('profile client', () => {
     let resp = await createProfile({
       org,
       name,
+      loc: {
+        latitude: 38.244923,
+        longitude: -122.626991
+      },
       email: requestedBy,
       roles: [UserRole.USER, UserRole.STORE_ADMIN]
     })
@@ -32,5 +36,12 @@ describe('profile client', () => {
     const delOResp = await deleteOrg(org)
     expect(delOResp.error).toEqual(undefined)
     expect(delOResp.ok).toEqual(true)
+  })
+
+  test('profileFetch', async () => {
+    const requestedBy = 'vtalwar.test@gmail.com'
+    const resp = await getProfile(requestedBy)
+    expect(resp.error).toEqual(undefined)
+
   })
 })

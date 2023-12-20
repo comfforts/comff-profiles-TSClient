@@ -20,6 +20,7 @@ export interface Profile {
   roles: UserRole[]
   externalId?: string
   loc?: ILocation
+  geocode?: string
   status?: UserStatus
 }
 
@@ -81,6 +82,7 @@ export const mapProtoToProfile = (u: User): Profile => {
     status: u.getStatus(),
     roles: u.getRolesList(),
     externalId: u.getExternalId(),
+    geocode: u.getGeocode(),
     loc
   }
 }
